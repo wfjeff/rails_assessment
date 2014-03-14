@@ -12,3 +12,20 @@
 
 <%= link_to 'Edit', edit_post_path(@post) %> |
 <%= link_to 'Back', posts_path %>
+<p>
+  <strong>Comments:</strong>
+</p>
+<% @post.comments.each do |comment| %>
+<p>
+  <%= comment.content %> <a href="/comments/<%= comment.id %>">permalink</a>
+</p>
+<% end %>
+<p>
+  <strong>Add a comment:</strong>
+</p>
+<form action="/comments" method="POST">
+<%= token_tag %>
+  <input type="text" name="comment[content]"></input>
+  <input type="hidden" name="comment[post_id]", value="<%= @post.id %>"></input>
+  <input type="submit" value="submit">
+</form>
