@@ -1,0 +1,54 @@
+Rails Assesment
+
+The answers to this assesment should be submitted in the form of a link to a github repo
+The repository should be a rails app with one additional file in the root directory called assesment.txt
+
+Create a blog.
+
+The blog should have the ability to have posts and comments on posts.  There's no need to add a user model.
+
+From any post I should be able to both see all the comments and add a comment myself.
+
+Questions to be answered in the assesment.txt file.
+
+How does rails communicate with the database?  Please be thorough in discussing all the config files and pieces of rails necessary to communicate with the database.
+
+  Rails communicates with the sqlite3 database through ActiveRecord, which provides helper functions that abstract away all the SQL code using macros like has_many. These macros use metaprogramming to provide us with functions like readers and writers, which we can then use to make the database mirror the data we manipulate in our Ruby code.
+
+What is a resource?
+
+  A resource is the model, database table, controller and views neceessary to represent something in our application, such as a blog post or comment.
+
+What are the standard RESTful routes for a resource?
+  
+  GET     /resources
+  POST    /resources
+  GET     /resources/new
+  GET     /resources/id/show
+  GET     /resources/id/edit
+  PATCH   /resources/id
+  DELETE  /resources/id
+
+What is CRUD?
+
+  CRUD stands for create, read, update, and destroy. These are the four things we need to do to manage a resource.
+
+What is REST?
+
+  REST is an abbreviation for representational state transfer. It refers to the ideal way to transfer data. By making data actually describe the resource it relates to when we transfer it, we make that data much easier and more intuitive for the receiver to use. For example, the link www.celebritygossip.com/ryangostling/ryans-fourteen-illegitimate-children tells us a lot more than the link www.celebritygossip.com/124[]?=655. Both might represent the same HTML page, but one transfers data in a state that represents the underlying resource in a way that is more useful to consumers and developers.
+
+What is the difference between CRUD and REST?
+
+  CRUD is the collection of commands necessary to manage a resource, whereas REST is a philosophy for how to execute those commands. We strive to make our CRUD tasks RESTful because it makes our code simple and easy to use.
+
+Describe the flow of a request from a users browser through the rails stack and back.
+
+  When a user clicks a link in a browser, this sends a get request to our application asking it to show return the site with that URL. Our application receives that request through HTTP, and checks its routes for that URL. If a route is found, it forwards the application to the controller and method associated with the URL. The method then retrieves any necessary information from the database and passes it to a view or redirects it to another route. Once the application reaches a view, it interprets the ERB, embedding any necessary information passed to it from the controller, and creates an HTML file. This HTML file is then served back to the user's browser as the response to their request. The browser then renders the HTML file for the user.
+
+What are HTTP verbs?
+
+  HTTP verbs are words like GET, POST, PUT, PATCH, and DELETE which are used in an HTTP request to tell the server what the sender would like their request to do. Although there are many verbs, most browsers only support GET and POST, and web developers simply 'fake' the others.
+
+Why do we use migrations.
+
+  We use migrations to modify the schema of our database. This is a non-trivial task which should be recorded as a set of instructions written in Ruby that can easily be repeated should we want to reconstruct our database schema. Using migrations instead of simply modifying our schema with SQL commands makes it easy to do that. It also makes it possible to more easily reverse changes to the database, and it is much more readable than raw SQL because it is written in Ruby.
