@@ -1,4 +1,6 @@
 RailsAssessment::Application.routes.draw do
+  root 'site#index'
+
   resources :comments
 
   resources :posts
